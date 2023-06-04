@@ -11,7 +11,7 @@ def customers_list(request):
     if request.method == "GET":
         customers = Customer.objects.all()
         serializer = CustomerSerializer(customers, many=True)
-        return Response({"customers": serializer.data})
+        return Response(serializer.data)
 
     if request.method == "POST":
         serializer = CustomerSerializer(data=request.data)
@@ -20,8 +20,7 @@ def customers_list(request):
         if serializer.is_valid():
             serializer.save()
             return Response(
-                {"customers": serializer.data},
-                status=status.HTTP_201_CREATED,
+                {"customers": serializer.data}, status=status.HTTP_201_CREATED
             )
 
 
@@ -34,13 +33,13 @@ def customer_detail(request, pk):
 
     if request.method == "GET":
         serializer = CustomerSerializer(customer)
-        return Response(serializer.data)
+        return Response({"customer": serializer.data})
 
     if request.method == "PUT":
         serializer = CustomerSerializer(customer, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response({"customer": serializer.data})
         # if update / put is not working
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
