@@ -16,4 +16,4 @@ The API from this application also can be used for the front-end as well.
 - Using Django Rest Framework to request and response the customer's data
 - Make all customer's data as JSON format
 - Should response with the status codes (200, 201, 400, 401)
-- Test(?)
+- Test the consumable API using PyTest
